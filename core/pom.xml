@@ -13,7 +13,6 @@
     <artifactId>core</artifactId>
 
     <modules>
-        <module>core-frontend</module>
         <module>core-backend</module>
     </modules>
 
