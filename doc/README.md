@@ -29,4 +29,9 @@ CONTAINER ID   IMAGE                                                         COM
                    mysql-de
 
 sudo docker compose up -d
+
+mysql -h127.0.0.1 -uroot -p -P 3316
+
+admin
+DataEase@123456
 ```
