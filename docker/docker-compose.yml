@@ -8,6 +8,8 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+    ports:
+      - 3306:3306
     env_file:
       - ${DE_BASE}/dataease2.0/conf/mysql.env
     volumes:
