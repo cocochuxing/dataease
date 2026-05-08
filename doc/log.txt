@@ -3470,3 +3470,16 @@ IMAGE                                                         ID             DIS
 nginx:latest                                                  6e23479198b9        240MB         65.8MB
 registry.cn-qingdao.aliyuncs.com/dataease/dataease:v2.10.22   24da8f5e44dd        816MB          316MB    U
 registry.cn-qingdao.aliyuncs.com/dataease/mysql:8.4.5         6be932372310       1.06GB          236MB    U
+
+bash dataease-online-installer-v2.10.22-ce/uninstall.sh
+如需备份 DataEase 数据，请执行 dectl backup 进行备份。如您的 dectl 命令不支持 backup 命令，请升级版本。
+即将卸载 DataEase 服务，包括删除运行目录、数据及相关镜像，是否继续? [Y/n] Y
+Yes
+停止 DataEase 服务
+移除 DataEase 服务
+WARNING: This output is designed for human readability. For machine-readable output, please use --format.
+清理 DataEase 镜像
+WARNING: This output is designed for human readability. For machine-readable output, please use --format.
+Error response from daemon: invalid reference format
+Error response from daemon: invalid reference format
+DataEase 服务卸载完成
