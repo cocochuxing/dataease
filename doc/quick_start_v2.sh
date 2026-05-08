@@ -13,7 +13,7 @@ curl -m 5 -kIs https://${server_url} >/dev/null
 if [ $? != 0 ];then
 	echo "failed"
 	echo "没有找到稳定的下载服务器，请稍候重试"
-	exit 1
+	#exit 1
 else
 	echo "ok"
 fi
@@ -68,7 +68,7 @@ echo "开始下载 DataEase ${latest_version} 版本在线安装包"
 installer_file="dataease-online-installer-${latest_version}-ce.tar.gz"
 download_url="https://${server_url}/dataease/dataease/releases/download/${latest_version}/$installer_file"
 echo "下载地址： ${download_url}"
-curl -LOk -m 60 -o $installer_file $download_url
+#curl -LOk -m 60 -o $installer_file $download_url
 
 if [ ! -f ${installer_file} ];then
 	echo "下载在线安装包失败，请试试重新执行一次安装命令。"
