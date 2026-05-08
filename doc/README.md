@@ -13,4 +13,11 @@ nvm install 22
 npm config set registry https://registry.npmmirror.com/
 npm install
 npm run build:distributed
+
+curl -sSL https://dataease.oss-cn-hangzhou.aliyuncs.com/quick_start_v2.sh | bash
+
+# 用户名: admin
+# 密码: DataEase@123456
+sudo su
+bash quick_start_v2.sh
 ```
