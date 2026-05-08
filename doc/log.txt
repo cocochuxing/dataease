@@ -3457,3 +3457,9 @@ dataease-online-installer-v2.10.22-ce/uninstall.sh
         配置 dataease Service
         配置开机自启动
 10. 启动 DataEase 服务
+======================= 安装完成 =======================
+
+系统登录信息如下:
+        访问地址: http://服务器IP:8100
+        用户名: admin
+        初始密码: DataEase@123456

@@ -20,4 +20,11 @@ curl -sSL https://dataease.oss-cn-hangzhou.aliyuncs.com/quick_start_v2.sh | bash
 # 密码: DataEase@123456
 sudo su
 bash quick_start_v2.sh
+
+docker ps
+CONTAINER ID   IMAGE                                                         COMMAND                  CREATED             STATUS                       PORTS
+                   NAMES
+1110d7e666ad   registry.cn-qingdao.aliyuncs.com/dataease/dataease:v2.10.22   "/deployments/run-ja…"   About an hour ago   Up About an hour (healthy)   0.0.0.0:8100->8100/tcp, [::]:8100->8100/tcp   dataease
+051d4cb9e12c   registry.cn-qingdao.aliyuncs.com/dataease/mysql:8.4.5         "docker-entrypoint.s…"   About an hour ago   Up About an hour (healthy)   3306/tcp, 33060/tcp
+                   mysql-de
 ```
