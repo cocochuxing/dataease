@@ -31,6 +31,7 @@ CONTAINER ID   IMAGE                                                         COM
 sudo docker compose up -d
 
 mysql -h127.0.0.1 -uroot -p -P 3316
+Password123@mysql
 
 admin
 DataEase@123456
