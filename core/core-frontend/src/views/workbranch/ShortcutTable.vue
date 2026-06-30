@@ -580,7 +580,7 @@ const getEmptyDesc = (): string => {
       font-size: 18px;
       padding: 3px;
       margin-right: 12px;
-      border-radius: 6px;
+      border-radius: 4px;
       color: #fff;
     }
     .name-star {
@@ -618,5 +618,14 @@ const getEmptyDesc = (): string => {
 .menu-panel-select_popper {
   min-width: 140px;
   background: #fff;
+}
+.dashboard-type {
+  .name-content {
+    display: flex;
+    align-items: center;
+    .ed-icon svg {
+      border-radius: 4px;
+    }
+  }
 }
 </style>

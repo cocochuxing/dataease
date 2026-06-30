@@ -24,6 +24,7 @@ import { useEmbedded } from '@/store/modules/embedded'
 import { useAppStoreWithOut } from '@/store/modules/app'
 import { useShareStoreWithOut } from '@/store/modules/share'
 import { queryShareBaseApi } from '@/api/visualization/dataVisualization'
+import { cloneDeep } from 'lodash'
 
 const shareStore = useShareStoreWithOut()
 
@@ -90,7 +91,7 @@ const activeTabChange = value => {
 
 const tabBtnList = [
   {
-    name: t('work_branch.recommended_dashboard'),
+    name: t('work_branch.dashboard'),
     value: 'PANEL'
   },
   {
@@ -130,11 +131,13 @@ watch(
   }
 )
 
+let marketTemplateList = []
+
 const initMarketTemplate = async () => {
   await searchMarketRecommend()
     .then(rsp => {
       state.baseUrl = rsp.data.baseUrl
-      state.marketTemplatePreviewShowList = rsp.data.contents
+      marketTemplateList = rsp.data.contents
       state.hasResult = true
       initTemplateShow()
     })
@@ -145,12 +148,17 @@ const initMarketTemplate = async () => {
 
 const initTemplateShow = () => {
   state.hasResult = false
+  state.marketTemplatePreviewShowList = cloneDeep(marketTemplateList)
   state.marketTemplatePreviewShowList.forEach(template => {
     template.showFlag = templateShowCur(template)
     if (template.showFlag) {
       state.hasResult = true
     }
   })
+
+  state.marketTemplatePreviewShowList = state.marketTemplatePreviewShowList
+    .filter(ele => ele.showFlag)
+    .slice(0, 5)
 }
 
 const templateShowCur = templateItem => {
@@ -416,7 +424,6 @@ loadShareBase()
             <div class="template-list" v-show="state.networkStatus && state.hasResult">
               <template-branch-item
                 v-for="(template, index) in state.marketTemplatePreviewShowList"
-                v-show="template['showFlag']"
                 :key="index"
                 :template="template"
                 :base-url="state.baseUrl"
