@@ -9,7 +9,7 @@ services:
       timeout: 3s
       retries: 10
     ports:
-      - 3316:3306
+      - 3310:3306
     env_file:
       - ${DE_BASE}/dataease2.0/conf/mysql.env
     volumes:
@@ -20,7 +20,7 @@ services:
       - dataease-network
   
   dataease:
-    image: yiluxiangbei/dataease:v2.10.22
+    image: yiluxiangbei/tortoise:latest 
     stop_signal: SIGTERM
     stop_grace_period: 15s
     container_name: dataease
