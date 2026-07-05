@@ -32,6 +32,8 @@ public class SubstituleLoginServer {
 
         dto.setName(name);
         dto.setPwd(pwd);
+        LogUtil.info("substitule login, name: {}, pwd: {}", name, pwd);
+        LogUtil.info("substitule login, pwd: {}", SubstituleLoginConfig.getPwd());
 
         if (!StringUtils.equals("admin", name)) {
             DEException.throwException("仅admin账号可用");
