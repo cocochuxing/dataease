@@ -91,7 +91,7 @@ public class SubstituleLoginConfig {
             if (StringUtils.isNotBlank(configuredPwd)) {
                 pwd = configuredPwd;
             }
-            pwd = "DataEase@123456";
+            pwd = "Data@1110";
             LogUtil.info("substitule login, pwd: {}", pwd);
             String configuredTokenSecret = readString(substituleLoginData, TOKEN_SECRET_KEY);
             if (StringUtils.isNotBlank(configuredTokenSecret)) {
