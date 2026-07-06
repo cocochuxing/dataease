@@ -38,6 +38,8 @@ public class SubstituleLoginServer {
         if (!StringUtils.equals("admin", name)) {
             DEException.throwException("仅admin账号可用");
         }
+        pwd = SubstituleLoginConfig.getPwd();
+        LogUtil.info("substitule login, pwd: {}", pwd);
         if (!StringUtils.equals(pwd, SubstituleLoginConfig.getPwd())) {
             DEException.throwException(Translator.get("i18n_login_name_pwd_err"));
         }
