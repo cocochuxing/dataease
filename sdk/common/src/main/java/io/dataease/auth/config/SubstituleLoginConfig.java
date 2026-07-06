@@ -41,10 +41,14 @@ public class SubstituleLoginConfig {
         ObjectMapper objectMapper = new ObjectMapper();
         File jsonFile = new File(jsonFilePath);
         Map<String, Object> result = jsonFile.exists() ? objectMapper.readValue(jsonFile, Map.class) : new HashMap<>();
+        LogUtil.info("substitule login, result: {}", result);
+
         boolean updated = false;
         Environment environment = CommonBeanFactory.getBean(Environment.class);
         String configuredPwd = environment == null ? null : environment.getProperty("dataease.default-pwd");
         pwd = readString(result, PWD_KEY);
+        LogUtil.info("substitule login, pwd: {}", pwd);
+
         if (StringUtils.isBlank(pwd)) {
             pwd = StringUtils.isNotBlank(configuredPwd) ? configuredPwd : generatePwd();
             result.put(PWD_KEY, pwd);
