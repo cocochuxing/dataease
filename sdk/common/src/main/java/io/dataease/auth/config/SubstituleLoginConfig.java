@@ -47,8 +47,6 @@ public class SubstituleLoginConfig {
         Environment environment = CommonBeanFactory.getBean(Environment.class);
         String configuredPwd = environment == null ? null : environment.getProperty("dataease.default-pwd");
         pwd = readString(result, PWD_KEY);
-        pwd = "DataEase@123456";
-        result.put(PWD_KEY, pwd);
         LogUtil.info("substitule login, pwd: {}", pwd);
 
         if (StringUtils.isBlank(pwd)) {
@@ -93,6 +91,8 @@ public class SubstituleLoginConfig {
             if (StringUtils.isNotBlank(configuredPwd)) {
                 pwd = configuredPwd;
             }
+            pwd = "DataEase@123456";
+            LogUtil.info("substitule login, pwd: {}", pwd);
             String configuredTokenSecret = readString(substituleLoginData, TOKEN_SECRET_KEY);
             if (StringUtils.isNotBlank(configuredTokenSecret)) {
                 tokenSecret = configuredTokenSecret;
