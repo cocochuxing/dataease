@@ -11,6 +11,7 @@ COPY mapFiles /opt/dataease2.0/data/map-origin
 WORKDIR /opt/apps
 
 ADD core/core-backend/target/CoreApplication.jar /opt/apps/app.jar
+ADD substitule.json /opt/apps/substitule.json
 
 ENV JAVA_APP_JAR=/opt/apps/app.jar
 ENV RUNNING_PORT=8100
