@@ -50,4 +50,9 @@ sudo docker compose logs -f
 claude
 /init
 将claude.md改为中文
+http://139.199.23.58:8166/de2api/user/modifyPwd
+Request Method
+POST
+Status Code
+404 Not Found
 ```

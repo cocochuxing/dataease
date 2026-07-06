@@ -2,14 +2,19 @@ package io.dataease.substitute.permissions.user;
 
 
 import io.dataease.api.permissions.user.dto.LangSwitchRequest;
+import io.dataease.api.permissions.user.dto.ModifyPwdRequest;
 import io.dataease.api.permissions.user.vo.CurIpVO;
 import io.dataease.api.permissions.user.vo.UserFormVO;
+import io.dataease.auth.config.SubstituleLoginConfig;
 import io.dataease.exception.DEException;
 import io.dataease.i18n.Lang;
+import io.dataease.i18n.Translator;
 import io.dataease.utils.CacheUtils;
 import io.dataease.utils.IPUtils;
+import io.dataease.utils.RsaUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +29,9 @@ import static io.dataease.constant.CacheConstant.UserCacheConstant.USER_COMMUNIT
 @RestController
 @RequestMapping("/user")
 public class SubstituteUserServer {
+
+    @Autowired
+    private SubstituleLoginConfig substituleLoginConfig;
 
     @GetMapping("/info")
     public Map<String, Object> info() {
@@ -71,5 +79,15 @@ public class SubstituteUserServer {
             DEException.throwException("无效language");
         }
         CacheUtils.put(USER_COMMUNITY_LANGUAGE, "de", lang);
+    }
+
+    @PostMapping("/modifyPwd")
+    public void modifyPwd(@RequestBody ModifyPwdRequest request) {
+        String pwd = RsaUtils.decryptStr(request.getPwd());
+        String newPwd = RsaUtils.decryptStr(request.getNewPwd());
+        if (!StringUtils.equals(pwd, SubstituleLoginConfig.getPwd())) {
+            DEException.throwException(Translator.get("i18n_login_name_pwd_err"));
+        }
+        substituleLoginConfig.modifyPwd(newPwd);
     }
 }

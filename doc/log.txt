@@ -3483,3 +3483,12 @@ WARNING: This output is designed for human readability. For machine-readable out
 Error response from daemon: invalid reference format
 Error response from daemon: invalid reference format
 DataEase 服务卸载完成
+
+● 这个 404 是因为 /user/modifyPwd 接口在开源版中没有实现。
+
+  原因：
+  - 接口定义在 sdk/api/api-permissions/.../UserApi.java:168
+  - 开源 core-backend 中的替补实现只有 SubstituteUserServer，它只实现了 /info、/personInfo、/ipInfo、/switchLanguage
+  - 真正的 modifyPwd 实现在闭源的 de-xpack 子模块中（当前未初始化）
+
+  我可以帮你在 SubstituteUserServer 中补上社区版/单机版的 modifyPwd 实现，让修改密码接口可用。是否继续？
