@@ -3492,3 +3492,7 @@ DataEase 服务卸载完成
   - 真正的 modifyPwd 实现在闭源的 de-xpack 子模块中（当前未初始化）
 
   我可以帮你在 SubstituteUserServer 中补上社区版/单机版的 modifyPwd 实现，让修改密码接口可用。是否继续？
+
+ ERROR  5:19:20 PM [vite] http proxy error: de2api/sysParameter/requestTimeOut                                17:19:20
+Error: connect ECONNREFUSED 127.0.0.1:8100
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
