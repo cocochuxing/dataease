@@ -35,4 +35,19 @@ Password123@mysql
 
 admin
 DataEase@123456
+
+sudo docker build -t yiluxiangbei/tortoise .
+
+git pull
+cd core
+mvn clean package
+cd ..
+sudo docker build -t yiluxiangbei/tortoise .
+cd docker
+sudo docker compose up -d
+sudo docker compose logs -f
+
+claude
+/init
+将claude.md改为中文
 ```
