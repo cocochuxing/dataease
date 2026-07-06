@@ -20,7 +20,7 @@ services:
       - dataease-network
   
   dataease:
-    image: yiluxiangbei/tortoise:latest 
+    image: yiluxiangbei/dataease:v2.10.22 
     stop_signal: SIGTERM
     stop_grace_period: 15s
     container_name: dataease
