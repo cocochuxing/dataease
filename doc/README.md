@@ -56,4 +56,12 @@ POST
 Status Code
 404 Not Found
 npm run dev页面一直加载，请求接口为http://139.199.23.58:8166/de2api
+ WARN  4:38:53 PM [vite] (client) warning:                                                                    16:38:53
+/mnt/d/dev/luomor/dataease/core/core-frontend/src/websocket/index.ts
+  88:13  warning  'timeInterval' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+  Plugin: vite-plugin-eslint
+  File: /mnt/d/dev/luomor/dataease/core/core-frontend/src/websocket/index.ts
 ```
