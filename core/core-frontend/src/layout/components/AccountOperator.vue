@@ -9,7 +9,6 @@ import { logoutHandler } from '@/utils/logout'
 import { XpackComponent } from '@/components/plugin'
 import { useI18n } from '@/hooks/web/useI18n'
 import { useEmitt } from '@/hooks/web/useEmitt'
-import AboutPage from '@/views/about/index.vue'
 import LangSelector from './LangSelector.vue'
 import router from '@/router'
 import { useCache } from '@/hooks/web/useCache'
@@ -176,7 +175,6 @@ if (uid.value === '1') {
     </div>
   </el-popover>
 
-  <AboutPage />
   <XpackComponent jsname="dWNlbnRlci1oYW5kbGVy" @loaded="xpackLinkLoaded" />
 </template>
 

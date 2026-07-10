@@ -64,4 +64,18 @@ npm run dev页面一直加载，请求接口为http://139.199.23.58:8166/de2api
 
   Plugin: vite-plugin-eslint
   File: /mnt/d/dev/luomor/dataease/core/core-frontend/src/websocket/index.ts
+
+#! /bin/bash
+git pull
+cd core/core-frontend
+npm run build:distributed
+cd ..
+rm -rf core-backend/src/main/resources/static/*
+cp -r core-frontend/dist/* core-backend/src/main/resources/static/
+mvn clean package
+cd ..
+sudo docker build -t yiluxiangbei/tortoise .
+cd docker
+sudo docker compose up -d
+sudo docker compose logs -f
 ```
