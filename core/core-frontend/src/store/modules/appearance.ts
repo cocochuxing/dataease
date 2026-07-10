@@ -252,7 +252,7 @@ export const useAppearanceStore = defineStore('appearanceStore', {
       const resData = res.data
       if (!resData?.length) {
         if (!isDataEaseBi) {
-          document.title = 'DataEase'
+          document.title = '七橙智擎'
           setLinkIcon()
         }
         return
@@ -345,8 +345,8 @@ export const useAppearanceStore = defineStore('appearanceStore', {
         document.title = this.name
         setTitle(this.name)
       } else {
-        document.title = 'DataEase'
-        setTitle('DataEase')
+        document.title = '七橙智擎'
+        setTitle('七橙智擎')
       }
       setLinkIcon(this.web)
     }
