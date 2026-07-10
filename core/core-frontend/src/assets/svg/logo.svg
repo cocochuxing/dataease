@@ -1,31 +1,24 @@
-<svg width="640" height="180" viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg" role="img">
+<svg width="640" height="200" viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img">
   <title>七橙智擎 logo</title>
-  <desc>橙色圆角方形图标，内含由数字7与齿轮/电路元素构成的抽象标志，右侧为“七橙智擎”中文字标</desc>
-  <defs>
-    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF8A3D"/>
-      <stop offset="100%" stop-color="#E85D0B"/>
-    </linearGradient>
-  </defs>
+  <desc>橙色圆角矩形背景，白色中文字体标志，左侧配有齿轮与火花图形元素，象征智能与动力</desc>
 
-  <!-- 图标：圆角方形底 -->
-  <rect x="14" y="14" width="152" height="152" rx="34" fill="url(#orangeGrad)"/>
+  <rect x="0" y="0" width="640" height="200" rx="24" fill="#E8621F"/>
 
-  <!-- 内部：抽象“7” + 电路节点，构成“智擎”意象 -->
-  <g fill="#FFFFFF">
-    <!-- “7”主体：顶横 + 斜撇，做成略带速度感的几何造型 -->
-    <path d="M52 46 H128 L128 66 L92 138 H66 L100 66 H52 Z"/>
-    <!-- 齿轮/引擎点缀：三个圆点连成弧线，代表智擎的动力节点 -->
-    <circle cx="118" cy="104" r="7"/>
-    <circle cx="98" cy="118" r="5.5"/>
-    <circle cx="132" cy="128" r="5.5"/>
+  <g transform="translate(56,100)" fill="none" stroke="#FFFFFF" stroke-width="4">
+    <circle cx="0" cy="0" r="34" fill="#FFFFFF" fill-opacity="0.12"/>
+    <circle cx="0" cy="0" r="16" fill="none"/>
+    <g stroke-linecap="round">
+      <line x1="0" y1="-34" x2="0" y2="-24"/>
+      <line x1="0" y1="34" x2="0" y2="24"/>
+      <line x1="-34" y1="0" x2="-24" y2="0"/>
+      <line x1="34" y1="0" x2="24" y2="0"/>
+      <line x1="-24" y1="-24" x2="-17" y2="-17"/>
+      <line x1="24" y1="-24" x2="17" y2="-17"/>
+      <line x1="-24" y1="24" x2="-17" y2="17"/>
+      <line x1="24" y1="24" x2="17" y2="17"/>
+    </g>
+    <path d="M -4 -8 L 6 -2 L -1 1 L 6 8 L -8 2 L -1 -1 Z" fill="#FFFFFF" stroke="none"/>
   </g>
-  <!-- 细电路连线，呼应“智擎”科技感 -->
-  <path d="M118 104 L98 118 M118 104 L132 128" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.85"/>
 
-  <!-- 中文字标 -->
-  <g fill="#2B2B29" font-family="'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif">
-    <text x="192" y="76" font-size="46" font-weight="700" letter-spacing="2">七橙智擎</text>
-    <text x="194" y="112" font-size="17" font-weight="400" fill="#8A6A55" letter-spacing="6">QICHENG · INTELLIGENCE ENGINE</text>
-  </g>
+  <text x="130" y="122" font-family="'PingFang SC','Microsoft YaHei','Heiti SC',sans-serif" font-size="72" font-weight="600" fill="#FFFFFF" letter-spacing="4">七橙智擎</text>
 </svg>

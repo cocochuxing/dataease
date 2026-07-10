@@ -155,15 +155,6 @@ onMounted(() => {
           <Icon name="copilot"><logo_sqlbot @click="handleSQLBotClick" class="svg-icon" /></Icon>
         </el-icon>
       </el-tooltip>
-      <el-tooltip offset="10" effect="dark" :content="t('commons.assistant')" placement="bottom">
-        <el-icon
-          style="margin: 0 10px"
-          class="ai-icon"
-          v-if="aiBaseUrl && !showOverlay && appearanceStore.getShowAi"
-        >
-          <Icon name="dv-ai"><dvAi @click="handleAiClick" class="svg-icon" /></Icon>
-        </el-icon>
-      </el-tooltip>
       <el-tooltip
         offset="10"
         effect="dark"

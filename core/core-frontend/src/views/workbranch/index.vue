@@ -383,10 +383,6 @@ loadShareBase()
             >
               <div class="empty-tooltip-container-template" />
             </el-tooltip>
-            <el-icon class="main-color-quick template-create">
-              <Icon name="icon_template_colorful"><icon_template_colorful class="svg-icon" /></Icon>
-            </el-icon>
-            <span class="name">{{ t('work_branch.new_using_template') }}</span>
           </div>
         </div>
       </div>
