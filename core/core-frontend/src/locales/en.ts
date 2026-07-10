@@ -145,7 +145,7 @@ export default {
     error_msg: 'Error message',
     confirm_export: 'Are you sure you want to export the log',
     export_success: 'Export successful',
-    excel_file_name: 'DataEase operation log',
+    excel_file_name: 'LuomorData operation log',
     relevant_content_found: 'No relevant content found',
     mobile: 'Mobile terminal',
     client: 'Client'
@@ -583,7 +583,7 @@ export default {
     not_exceeding_5m:
       'Left side background image, recommended size 375*480 for vector image, recommended size 1125*1440 for bitmap; support JPG, PNG, SVG, size not exceeding 5M',
     hidden_in_iframe: 'Hidden in Iframe',
-    available_to_everyone: 'Open source BI tool available to everyone',
+    available_to_everyone: '七橙智擎',
     the_website_name: 'Please enter the website name',
     enter_the_slogan: 'Please enter the slogan',
     the_help_document: 'Please enter the help document',
@@ -1013,7 +1013,7 @@ export default {
     auth_method: 'Authentication Method',
     passwd: 'Username and Password',
     kerbers_info:
-      'Please make sure krb5.Conf, Keytab Key, have been added to the path: /opt/dataease2.0/conf',
+      'Please make sure krb5.Conf, Keytab Key, have been added to the path: /opt/luomordata2.0/conf',
     client_principal: 'Client Principal',
     keytab_Key_path: 'Keytab Key Path',
     please_select_left: 'Please select from the left',
@@ -2313,7 +2313,7 @@ export default {
     invalid_table_check:
       'For non-directly connected datasets, please complete data synchronization first',
     parse_error:
-      'Excel parsing failed, please check the format, fields and other information. Specific reference: https://dataease.io/docs/user_manual/dataset_configuration/dataset_Excel',
+      'Excel parsing failed, please check the format, fields and other information. Specific reference: https://www.luomor.com/docs/user_manual/dataset_configuration/dataset_Excel',
     origin_field_type: 'Field origin type',
     edit_excel_table: 'Edit Excel dataset',
     edit_excel: 'Edit Excel',
@@ -3109,7 +3109,7 @@ export default {
     app_export: 'App Export',
     app_name: 'App Name',
     app_version: 'App Version',
-    app_required_version: 'Minimum DataEase Version',
+    app_required_version: 'Minimum LuomorData Version',
     description: 'Description',
     new_dataset: 'New Dataset',
     new_datasource: 'New Datasource',
@@ -3986,7 +3986,7 @@ export default {
     auth_method: 'Authentication method',
     passwd: 'Username and password',
     kerbers_info:
-      'Please make sure krb5.Conf and Keytab Key have been added to the path: /opt/dataease2.0/conf',
+      'Please make sure krb5.Conf and Keytab Key have been added to the path: /opt/luomordata2.0/conf',
     client_principal: 'Client Principal',
     keytab_Key_path: 'Keytab Key Path',
     data_base: 'Database name',
@@ -4797,7 +4797,7 @@ export default {
     disabled_success: 'Disabled successfully',
     delete_api_key: 'Are you sure you want to delete this API key? ',
     api_key_desc:
-      'API Key is your key to access DataEase API, which has full permissions for your account. Please keep it safe! Do not disclose API Key to external channels in any way to avoid security threats caused by others. '
+      'API Key is your key to access LuomorData API, which has full permissions for your account. Please keep it safe! Do not disclose API Key to external channels in any way to avoid security threats caused by others. '
   },
   free: {
     title: 'Free Resource Management',

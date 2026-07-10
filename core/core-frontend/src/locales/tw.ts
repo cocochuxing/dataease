@@ -142,7 +142,7 @@ export default {
     error_msg: '錯誤訊息',
     confirm_export: '確定匯出日誌嗎',
     export_success: '導出成功',
-    excel_file_name: 'DataEase操作日誌',
+    excel_file_name: 'LuomorData操作日誌',
     relevant_content_found: '沒有找到相關內容',
     mobile: '移動端',
     client: '客戶端'
@@ -564,7 +564,7 @@ export default {
     not_exceeding_5m:
       '左側背景圖，向量圖建議尺寸375*480，點陣圖建議尺寸1125*1440；支援JPG、PNG、SVG，大小不超過5M',
     hidden_in_iframe: 'Iframe中隱藏',
-    available_to_everyone: '人人可用的開源BI 工具',
+    available_to_everyone: '七橙智擎',
     the_website_name: '請輸入網站名稱',
     enter_the_slogan: '請輸入Slogan',
     the_help_document: '請輸入說明文件',
@@ -978,7 +978,7 @@ export default {
     data_source_table: '資料來源表',
     auth_method: '認證方式',
     passwd: '使用者名稱密碼',
-    kerbers_info: '請確保krb5.Conf、Keytab Key，已新增至路徑：/opt/dataease2.0/conf',
+    kerbers_info: '請確保krb5.Conf、Keytab Key，已新增至路徑：/opt/luomordata2.0/conf',
     client_principal: 'Client Principal',
     keytab_Key_path: 'Keytab Key Path',
     please_select_left: '請從左邊選擇',
@@ -2251,7 +2251,7 @@ export default {
     preview_100_data: '顯示前100行資料',
     invalid_table_check: '非直連資料集請先完成資料同步',
     parse_error:
-      'Excel解析失敗，請檢查格式、欄位等資訊。具體參考：https://dataease.io/docs/user_manual/dataset_configuration/dataset_Excel',
+      'Excel解析失敗，請檢查格式、欄位等資訊。具體參考：https://luomordata.io/docs/user_manual/dataset_configuration/dataset_Excel',
     origin_field_type: '字段原始類型',
     edit_excel_table: '編輯Excel資料集',
     edit_excel: '編輯Excel',
@@ -3023,7 +3023,7 @@ export default {
     app_export: '應用導出',
     app_name: '應用名稱',
     app_version: '應用版本號',
-    app_required_version: 'DataEase最低版本號',
+    app_required_version: 'LuomorData最低版本號',
     description: '描述',
     new_dataset: '新建數據集',
     new_datasource: '新建數據源',
@@ -3872,7 +3872,7 @@ export default {
     data_source_table: '資料來源表',
     auth_method: '認證方式',
     passwd: '使用者名稱密碼',
-    kerbers_info: '請確保krb5.Conf、Keytab Key，已新增至路徑：/opt/dataease2.0/conf',
+    kerbers_info: '請確保krb5.Conf、Keytab Key，已新增至路徑：/opt/luomordata2.0/conf',
     client_principal: 'Client Principal',
     keytab_Key_path: 'Keytab Key Path',
     data_base: '資料庫名稱',
@@ -4661,7 +4661,7 @@ export default {
     disabled_success: '停用成功',
     delete_api_key: '確定刪除該API key 嗎? ',
     api_key_desc:
-      'API Key 是您存取DataEase API 的金鑰，具有帳戶的完全權限，請務必妥善保管！不要以任何方式公開API Key 到外部頻道，避免被他人利用造成安全威脅。 '
+      'API Key 是您存取LuomorData API 的金鑰，具有帳戶的完全權限，請務必妥善保管！不要以任何方式公開API Key 到外部頻道，避免被他人利用造成安全威脅。 '
   },
   free: {
     title: '遊離資源管理',
