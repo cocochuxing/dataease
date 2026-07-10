@@ -367,23 +367,6 @@ loadShareBase()
               {{ t(`auth.${ele.name}`) }}
             </span>
           </div>
-          <div
-            class="item item-quick border-radius-12"
-            :class="{
-              'quick-create-disabled': !(havePanelAuth || haveScreenAuth)
-            }"
-            @click="toTemplateMarketAdd"
-          >
-            <el-tooltip
-              v-if="!(havePanelAuth || haveScreenAuth)"
-              class="box-item"
-              effect="dark"
-              :content="t('work_branch.permission_to_create')"
-              placement="top"
-            >
-              <div class="empty-tooltip-container-template" />
-            </el-tooltip>
-          </div>
         </div>
       </div>
     </div>
