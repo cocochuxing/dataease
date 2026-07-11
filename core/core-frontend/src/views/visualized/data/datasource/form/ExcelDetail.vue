@@ -23,6 +23,7 @@ import ExcelInfo from '../ExcelInfo.vue'
 import SheetTabs from '../SheetTabs.vue'
 import { cloneDeep, debounce } from 'lodash-es'
 import { uploadFile } from '@/api/datasource'
+import PythonScriptConfig from './PythonScriptConfig.vue'
 import { useEmitt } from '@/hooks/web/useEmitt'
 import { iconFieldMap } from '@/components/icon-group/field-list'
 import { boolean } from 'mathjs'
@@ -805,6 +806,7 @@ defineExpose({
           </el-table>
         </div>
       </template>
+      <PythonScriptConfig :datasource-id="param.id" />
     </div>
   </div>
 </template>

@@ -8,6 +8,7 @@ import io.dataease.datasource.dao.auto.entity.CoreDatasourceTask;
 import io.dataease.datasource.dao.auto.entity.CoreDatasourceTaskLog;
 import io.dataease.datasource.dao.auto.entity.CoreDeEngine;
 import io.dataease.datasource.dao.auto.mapper.CoreDatasourceMapper;
+import io.dataease.datasource.event.ExcelImportCompletedEvent;
 import io.dataease.datasource.provider.*;
 import io.dataease.datasource.request.EngineRequest;
 import io.dataease.datasource.server.DatasourceServer;
@@ -29,6 +30,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobKey;
 import org.quartz.TriggerKey;
 import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.*;
 
@@ -50,6 +52,8 @@ public class DatasourceSyncManage {
     private CalciteProvider calciteProvider;
     @Resource
     private DatasourceServer datasourceServer;
+    @Resource
+    private ApplicationEventPublisher applicationEventPublisher;
 
 
     public void extractExcelData(CoreDatasource coreDatasource, String type) {
@@ -75,6 +79,7 @@ public class DatasourceSyncManage {
                 if (updateType.equals(DatasourceServer.UpdateType.all_scope)) {
                     replaceTable(datasourceRequest.getTable());
                 }
+                publishExcelImportEvent(coreDatasource.getId(), datasourceRequest.getTable(), updateType.name());
                 datasetTableTaskLog.setInfo(datasetTableTaskLog.getInfo() + "/n End to sync datatable: " + datasourceRequest.getTable());
                 datasetTableTaskLog.setTaskStatus(TaskStatus.Completed.toString());
             } catch (Exception e) {
@@ -198,6 +203,7 @@ public class DatasourceSyncManage {
                 if (updateType.equals(DatasourceServer.UpdateType.all_scope)) {
                     replaceTable(datasourceRequest.getTable());
                 }
+                publishExcelImportEvent(coreDatasource.getId(), datasourceRequest.getTable(), updateType.name());
                 datasetTableTaskLog.setInfo(datasetTableTaskLog.getInfo() + "/n End to sync datatable: " + datasourceRequest.getTable());
                 datasetTableTaskLog.setTaskStatus(TaskStatus.Completed.toString());
                 datasetTableTaskLog.setEndTime(System.currentTimeMillis());
@@ -370,6 +376,14 @@ public class DatasourceSyncManage {
 
     public void fireNow(CoreDatasourceTask datasourceTask) throws Exception {
         scheduleManager.fireNow(datasourceTask.getId().toString(), datasourceTask.getDsId().toString());
+    }
+
+    private void publishExcelImportEvent(Long datasourceId, String engineTableName, String updateType) {
+        if (applicationEventPublisher != null) {
+            applicationEventPublisher.publishEvent(
+                    new ExcelImportCompletedEvent(this, datasourceId, engineTableName, updateType)
+            );
+        }
     }
 
     private DatasourceDTO transDTO(CoreDatasource record) {

@@ -16,4 +16,9 @@ spring:
 mybatis-plus:
   mapper-locations: classpath:mybatis/*.xml
 
-
+dataease:
+  python:
+    interpreter: /usr/bin/python3
+    default-timeout-seconds: 300
+    max-timeout-seconds: 3600
+    tmp-path: ${dataease.path.data:/opt/dataease2.0/data}/python-tmp/

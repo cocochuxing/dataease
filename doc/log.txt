@@ -53,3 +53,71 @@ Error: connect ECONNREFUSED 127.0.0.1:8100
 
 ● 这是一个需要多文件改动的功能实现，涉及 Excel 导入流程、Java 调用
   Python、结果回写数据库。需求还需要进一步明确，我先进入计划模式来梳理方案。
+
+● 已完成 Excel 导入后执行用户上传 Python 脚本的功能实现。
+
+  主要改动
+
+  后端
+
+  1. 数据库表（Flyway 迁移脚本）
+    - core/core-backend/src/main/resources/db/migration/V2.10.21__ddl.sql
+    - core/core-backend/src/main/resources/db/desktop/V2.10.21__ddl.sql
+    - 新增 core_python_script、core_datasource_python_script、core_python_script_log
+  2. 实体与 Mapper
+    - CorePythonScript、CoreDatasourcePythonScript、CorePythonScriptLog
+    - 对应 MyBatis-Plus Mapper
+  3. 业务逻辑
+    - PythonScriptManage：脚本/关联/日志的 CRUD
+    - PythonScriptExecutor：通过 ProcessBuilder 调用 Python，传递引擎表名和 JDBC 信息 JSON，捕获 stdout/stderr，解析
+  JSON，超时控制
+    - ExcelImportCompletedEvent + ExcelImportPythonScriptListener：Excel 导入完成后异步触发脚本执行
+  4. Hook 点
+    - DatasourceSyncManage.extractExcelData(...) 和 extractedExcelData(...)：每张 sheet 导入并 replaceTable
+  成功后发布事件
+  5. REST 接口（扩展 DatasourceApi，实现于 DatasourceServer）
+    - 上传/保存/列表/删除脚本
+    - 关联/取消关联数据源与脚本
+    - 查询执行日志
+  6. 配置
+    - application-standalone.yml / application-desktop.yml 新增 dataease.python.*
+
+  前端
+
+  - core/core-frontend/src/api/datasource.ts：新增 Python 脚本相关 API
+  - core/core-frontend/src/views/visualized/data/datasource/form/PythonScriptConfig.vue：上传脚本、关联脚本、查看执行日
+  志的组件
+  - ExcelDetail.vue：引入该组件
+
+  Python 脚本约定
+
+  脚本会收到两个参数：
+
+  /usr/bin/python3 /path/to/script_<uuid>.py <engine_table_name> '<jdbc_info_json>'
+
+  示例脚本：
+
+  import sys
+  import json
+
+  def main():
+      table_name = sys.argv[1]
+      jdbc_info = json.loads(sys.argv[2])
+      # 使用 jdbc_info 中的 jdbcUrl/username/password 查询数据
+      result = {"rowCount": 100, "message": "ok"}
+      print(json.dumps(result, ensure_ascii=False))
+
+  if __name__ == "__main__":
+      main()
+
+  注意事项
+
+  1. 当前环境没有安装 Java，我无法在本地编译验证。请在你的开发环境执行：
+  cd /mnt/d/dev/luomor/dataease
+  mvn clean install -DskipTests
+  cd core
+  mvn clean package -DskipTests
+  2. 确保运行 DataEase 的服务器已安装 Python3（默认路径 /usr/bin/python3），且脚本依赖（如 pandas、pymysql、jaydebeapi
+  等）已自行安装。
+  3. 当前按“一个数据源关联一个脚本”实现，如需多脚本可在后续扩展。
+  4. Python 脚本与 Java 进程同权限运行，请仅从可信来源上传脚本。

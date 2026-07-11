@@ -181,4 +181,49 @@ public interface DatasourceApi {
     @PostMapping("/loadRemoteFile")
     @Operation(summary = "加载文件")
     ExcelFileData loadRemoteFile(@RequestBody RemoteExcelRequest remoteExcelRequeste) throws DEException, IOException;
+
+    @PostMapping("/pythonScript/upload")
+    @Operation(summary = "上传Python脚本")
+    PythonScriptVO uploadPythonScript(@RequestParam("file") MultipartFile file) throws DEException;
+
+    @PostMapping("/pythonScript/save")
+    @Operation(summary = "保存Python脚本")
+    PythonScriptVO savePythonScript(@RequestBody PythonScriptRequest request) throws DEException;
+
+    @PostMapping("/pythonScript/list")
+    @Operation(summary = "Python脚本列表")
+    List<PythonScriptVO> listPythonScripts() throws DEException;
+
+    @GetMapping("/pythonScript/{id}")
+    @Operation(summary = "Python脚本详情")
+    PythonScriptVO getPythonScript(@PathVariable("id") Long id) throws DEException;
+
+    @DeleteMapping("/pythonScript/{id}")
+    @Operation(summary = "删除Python脚本")
+    void deletePythonScript(@PathVariable("id") Long id) throws DEException;
+
+    @DePermit({"#p0.datasourceId+':manage'"})
+    @PostMapping("/pythonScript/associate")
+    @Operation(summary = "关联数据源与Python脚本")
+    void associatePythonScript(@RequestBody PythonScriptRequest request) throws DEException;
+
+    @DePermit({"#p0+':read'"})
+    @GetMapping("/{datasourceId}/pythonScript")
+    @Operation(summary = "获取数据源关联的Python脚本")
+    PythonScriptVO getDatasourcePythonScript(@PathVariable("datasourceId") Long datasourceId) throws DEException;
+
+    @DePermit({"#p0+':manage'"})
+    @DeleteMapping("/{datasourceId}/pythonScript")
+    @Operation(summary = "取消数据源与Python脚本的关联")
+    void removeDatasourcePythonScript(@PathVariable("datasourceId") Long datasourceId) throws DEException;
+
+    @DePermit({"#p0.datasourceId+':read'"})
+    @PostMapping("/pythonScript/log/list")
+    @Operation(summary = "Python脚本执行日志")
+    List<PythonScriptLogVO> listPythonScriptLogs(@RequestBody PythonScriptRequest request) throws DEException;
+
+    @DePermit({"#p0+':read'"})
+    @GetMapping("/pythonScript/log/{logId}")
+    @Operation(summary = "Python脚本执行日志详情")
+    PythonScriptLogVO getPythonScriptLog(@PathVariable("logId") Long logId) throws DEException;
 }

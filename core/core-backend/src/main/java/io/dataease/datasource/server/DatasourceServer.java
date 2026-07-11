@@ -28,6 +28,7 @@ import io.dataease.datasource.dao.ext.mapper.TaskLogExtMapper;
 import io.dataease.datasource.manage.DataSourceManage;
 import io.dataease.datasource.manage.DatasourceSyncManage;
 import io.dataease.datasource.manage.EngineManage;
+import io.dataease.datasource.manage.PythonScriptManage;
 import io.dataease.datasource.provider.CalciteProvider;
 import io.dataease.datasource.provider.ExcelUtils;
 import io.dataease.exception.DEException;
@@ -112,6 +113,8 @@ public class DatasourceServer implements DatasourceApi {
     private RelationApi relationManage;
     @Resource
     private DatasetCacheManage datasetCacheManage;
+    @Resource
+    private PythonScriptManage pythonScriptManage;
 
     public enum UpdateType {
         all_scope, add_scope
@@ -1523,5 +1526,125 @@ public class DatasourceServer implements DatasourceApi {
             exception = exception.getCause();
 
         }
+    }
+
+    @Override
+    public PythonScriptVO uploadPythonScript(MultipartFile file) throws DEException {
+        if (file == null || file.isEmpty()) {
+            DEException.throwException("上传文件不能为空");
+        }
+        String originalFilename = file.getOriginalFilename();
+        if (StringUtils.isBlank(originalFilename) || !originalFilename.toLowerCase().endsWith(".py")) {
+            DEException.throwException("仅支持上传 .py 文件");
+        }
+        try {
+            String content = new String(file.getBytes(), java.nio.charset.StandardCharsets.UTF_8);
+            PythonScriptRequest request = new PythonScriptRequest();
+            request.setName(originalFilename.substring(0, originalFilename.length() - 3));
+            request.setFileName(originalFilename);
+            request.setScriptContent(content);
+            request.setStatus(1);
+            return savePythonScript(request);
+        } catch (Exception e) {
+            DEException.throwException("读取脚本文件失败: " + e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public PythonScriptVO savePythonScript(PythonScriptRequest request) throws DEException {
+        if (StringUtils.isBlank(request.getScriptContent())) {
+            DEException.throwException("脚本内容不能为空");
+        }
+        CorePythonScript entity = new CorePythonScript();
+        entity.setId(request.getId());
+        entity.setName(request.getName());
+        entity.setFileName(request.getFileName());
+        entity.setScriptContent(request.getScriptContent());
+        entity.setStatus(request.getStatus());
+        entity.setDescription(request.getDescription());
+        Long id = pythonScriptManage.save(entity);
+        return toPythonScriptVO(pythonScriptManage.getById(id));
+    }
+
+    @Override
+    public List<PythonScriptVO> listPythonScripts() throws DEException {
+        return pythonScriptManage.list().stream().map(this::toPythonScriptVO).collect(Collectors.toList());
+    }
+
+    @Override
+    public PythonScriptVO getPythonScript(Long id) throws DEException {
+        return toPythonScriptVO(pythonScriptManage.getById(id));
+    }
+
+    @Override
+    public void deletePythonScript(Long id) throws DEException {
+        pythonScriptManage.delete(id);
+    }
+
+    @Override
+    public void associatePythonScript(PythonScriptRequest request) throws DEException {
+        pythonScriptManage.associate(request.getDatasourceId(), request.getScriptId(), request.getEnabled());
+    }
+
+    @Override
+    public PythonScriptVO getDatasourcePythonScript(Long datasourceId) throws DEException {
+        CoreDatasourcePythonScript association = pythonScriptManage.getAssociation(datasourceId);
+        if (association == null) {
+            return null;
+        }
+        return toPythonScriptVO(pythonScriptManage.getById(association.getScriptId()));
+    }
+
+    @Override
+    public void removeDatasourcePythonScript(Long datasourceId) throws DEException {
+        pythonScriptManage.removeAssociation(datasourceId);
+    }
+
+    @Override
+    public List<PythonScriptLogVO> listPythonScriptLogs(PythonScriptRequest request) throws DEException {
+        return pythonScriptManage.listLogs(request.getDatasourceId(), request.getScriptId(), 50)
+                .stream().map(this::toPythonScriptLogVO).collect(Collectors.toList());
+    }
+
+    @Override
+    public PythonScriptLogVO getPythonScriptLog(Long logId) throws DEException {
+        return toPythonScriptLogVO(pythonScriptManage.getLogById(logId));
+    }
+
+    private PythonScriptVO toPythonScriptVO(CorePythonScript entity) {
+        if (entity == null) {
+            return null;
+        }
+        PythonScriptVO vo = new PythonScriptVO();
+        vo.setId(entity.getId());
+        vo.setName(entity.getName());
+        vo.setFileName(entity.getFileName());
+        vo.setScriptContent(entity.getScriptContent());
+        vo.setStatus(entity.getStatus());
+        vo.setDescription(entity.getDescription());
+        vo.setCreateBy(entity.getCreateBy());
+        vo.setCreateTime(entity.getCreateTime());
+        vo.setUpdateTime(entity.getUpdateTime());
+        return vo;
+    }
+
+    private PythonScriptLogVO toPythonScriptLogVO(CorePythonScriptLog entity) {
+        if (entity == null) {
+            return null;
+        }
+        PythonScriptLogVO vo = new PythonScriptLogVO();
+        vo.setId(entity.getId());
+        vo.setDatasourceId(entity.getDatasourceId());
+        vo.setScriptId(entity.getScriptId());
+        vo.setEngineTableName(entity.getEngineTableName());
+        vo.setStatus(entity.getStatus());
+        vo.setInputParams(entity.getInputParams());
+        vo.setOutputJson(entity.getOutputJson());
+        vo.setErrorMsg(entity.getErrorMsg());
+        vo.setStartTime(entity.getStartTime());
+        vo.setEndTime(entity.getEndTime());
+        vo.setCreateTime(entity.getCreateTime());
+        return vo;
     }
 }

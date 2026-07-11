@@ -197,3 +197,50 @@ export const listSyncRecord = (page: number, limit: number, dsId: number | strin
 export const getDeEngine = () => request.get({ url: '/engine/getEngine' })
 
 export const supportSetKey = () => request.get({ url: '/engine/supportSetKey' })
+
+export const uploadPythonScript = async (data): Promise<IResponse> => {
+  return request
+    .post({
+      url: '/datasource/pythonScript/upload',
+      data,
+      loading: true,
+      headersType: 'multipart/form-data;'
+    })
+    .then(res => res)
+}
+
+export const savePythonScript = async (data = {}): Promise<IResponse> => {
+  return request.post({ url: '/datasource/pythonScript/save', data }).then(res => res?.data)
+}
+
+export const listPythonScripts = async (): Promise<IResponse> => {
+  return request.post({ url: '/datasource/pythonScript/list' }).then(res => res?.data)
+}
+
+export const getPythonScript = async (id: number | string): Promise<IResponse> => {
+  return request.get({ url: `/datasource/pythonScript/${id}` }).then(res => res?.data)
+}
+
+export const deletePythonScript = async (id: number | string) => {
+  return request.delete({ url: `/datasource/pythonScript/${id}` })
+}
+
+export const associatePythonScript = async (data = {}): Promise<IResponse> => {
+  return request.post({ url: '/datasource/pythonScript/associate', data }).then(res => res?.data)
+}
+
+export const getDatasourcePythonScript = async (datasourceId: number | string): Promise<IResponse> => {
+  return request.get({ url: `/datasource/${datasourceId}/pythonScript` }).then(res => res?.data)
+}
+
+export const removeDatasourcePythonScript = async (datasourceId: number | string) => {
+  return request.delete({ url: `/datasource/${datasourceId}/pythonScript` })
+}
+
+export const listPythonScriptLogs = async (data = {}): Promise<IResponse> => {
+  return request.post({ url: '/datasource/pythonScript/log/list', data }).then(res => res?.data)
+}
+
+export const getPythonScriptLog = async (logId: number | string): Promise<IResponse> => {
+  return request.get({ url: `/datasource/pythonScript/log/${logId}` }).then(res => res?.data)
+}
