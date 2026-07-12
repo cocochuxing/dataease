@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import {
   uploadPythonScript,
   listPythonScripts,
@@ -20,15 +20,9 @@ const props = defineProps({
 
 const scripts = ref([])
 const currentScriptId = ref(null)
-const loading = ref(false)
 const uploadLoading = ref(false)
 const logs = ref([])
 const fileInput = ref(null)
-
-const currentScriptName = computed(() => {
-  const script = scripts.value.find(item => item.id === currentScriptId.value)
-  return script ? script.name : ''
-})
 
 const loadScripts = async () => {
   const data = await listPythonScripts()
@@ -131,12 +125,7 @@ const formatTime = (time: number) => {
       </div>
 
       <div class="associate-row">
-        <ElSelect
-          v-model="currentScriptId"
-          placeholder="选择脚本"
-          clearable
-          style="width: 240px"
-        >
+        <ElSelect v-model="currentScriptId" placeholder="选择脚本" clearable style="width: 240px">
           <ElOption
             v-for="script in scripts"
             :key="script.id"
@@ -162,8 +151,16 @@ const formatTime = (time: number) => {
         <ElTableColumn prop="engineTableName" label="引擎表" show-overflow-tooltip />
         <ElTableColumn prop="status" label="状态" width="100">
           <template #default="{ row }">
-            <ElTag :type="row.status === 'Success' ? 'success' : row.status === 'Failed' || row.status === 'Timeout' ? 'danger' : 'info'"
-              >{{ row.status }}</ElTag>
+            <ElTag
+              :type="
+                row.status === 'Success'
+                  ? 'success'
+                  : row.status === 'Failed' || row.status === 'Timeout'
+                  ? 'danger'
+                  : 'info'
+              "
+              >{{ row.status }}</ElTag
+            >
           </template>
         </ElTableColumn>
         <ElTableColumn prop="createTime" label="执行时间" width="160">
