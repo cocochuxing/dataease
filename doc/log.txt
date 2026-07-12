@@ -121,3 +121,6 @@ Error: connect ECONNREFUSED 127.0.0.1:8100
   等）已自行安装。
   3. 当前按“一个数据源关联一个脚本”实现，如需多脚本可在后续扩展。
   4. Python 脚本与 Java 进程同权限运行，请仅从可信来源上传脚本。
+
+  core/core-frontend/src/api/datasource.ts
+    232:49  error  Replace `datasourceId:·number·|·string` with `⏎··datasourceId:·number·|·string⏎`  prettier/prettier

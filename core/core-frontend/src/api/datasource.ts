@@ -229,7 +229,9 @@ export const associatePythonScript = async (data = {}): Promise<IResponse> => {
   return request.post({ url: '/datasource/pythonScript/associate', data }).then(res => res?.data)
 }
 
-export const getDatasourcePythonScript = async (datasourceId: number | string): Promise<IResponse> => {
+export const getDatasourcePythonScript = async (
+  datasourceId: number | string
+): Promise<IResponse> => {
   return request.get({ url: `/datasource/${datasourceId}/pythonScript` }).then(res => res?.data)
 }
 
